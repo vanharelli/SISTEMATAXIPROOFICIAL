@@ -1,0 +1,39 @@
+
+/* Support Menu Styles - Moved/Shared from pillars.css for Global Access */
+.support-dropdown {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background: rgba(0, 5, 10, 0.3); /* Transparent Glass (Padrão Header) */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.3); /* Gold border match header */
+  border-radius: 12px;
+  padding: 12px 20px;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  min-width: 200px;
+}
+
+.support-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  padding: 8px 0;
+}
+
+.support-item:hover {
+  opacity: 0.8;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

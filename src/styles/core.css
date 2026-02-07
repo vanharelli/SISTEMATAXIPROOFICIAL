@@ -1,0 +1,133 @@
+/* Core styles */
+
+/* Variáveis de Elite */
+:root {
+  --gold-marketelli: #D4AF37;
+  --green-led: #30c522;
+  --midnight-bg: #05070a;
+  --neon-glow: rgba(138, 43, 226, 0.15);
+  
+  /* Luxo Profundo Palette - 18:30 Deep Night */
+  --luxo-midnight: #000814;
+  --luxo-gold: #1a1200;
+  --luxo-green: #01110a;
+}
+
+/* Reset de Segurança */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Luxo Profundo Background Layer (HTML) */
+html {
+  overscroll-behavior: none; /* Bloqueio de Pull-to-Refresh */
+  height: 100%; /* Restored for fixed header stability */
+  width: 100%; /* Restored for fixed header stability */
+  overflow: hidden; /* Restored for fixed header stability */
+  font-family: sans-serif;
+  
+  /* Camada 0: Luxo Profundo (Fundo Dinâmico) */
+  background: radial-gradient(
+    circle at center, 
+    var(--luxo-gold) 0%, 
+    var(--luxo-green) 50%, 
+    var(--luxo-midnight) 100%
+  );
+  background-size: 150% 150%;
+  animation: luxo-expansion 45s ease-in-out infinite alternate;
+}
+
+/* Cyber-Grid Layer (Body) */
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  overscroll-behavior: none; /* Bloqueio de Pull-to-Refresh */
+  
+  /* Camada 1: Transparência para revelar o Luxo Profundo */
+  background-color: transparent;
+  
+  /* Camada 2: Grid Dourado (Extremamente sutil) */
+  background-image: 
+    linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center top;
+  
+  /* Perspectiva 3D */
+  perspective: 500px;
+  
+  /* Animação do Grid */
+  animation: grid-move-forward 20s linear infinite;
+
+  /* SURGICAL SECURITY FIX: Block Selection & Menus Globally */
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-drag: none !important;
+}
+
+/* SURGICAL SECURITY FIX: Input Exception for Selection & Menus */
+input, textarea {
+  user-select: text;
+  -webkit-touch-callout: default !important;
+}
+
+/* Animação Luxo Profundo - Explosão Subliminar */
+@keyframes luxo-expansion {
+  0% {
+    background-size: 100% 100%;
+    filter: brightness(1);
+  }
+  50% {
+    background-size: 130% 130%;
+    filter: brightness(1.2); /* Leve respiro na escuridão */
+  }
+  100% {
+    background-size: 100% 100%;
+    filter: brightness(1);
+  }
+}
+
+/* Horizonte Desfocado (Pseudo-elemento para evitar poluição no HTML) */
+/* body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30%; 
+  background: linear-gradient(to bottom, var(--midnight-bg) 0%, transparent 100%);
+  pointer-events: none; 
+  z-index: -1; 
+} */
+
+/* Animação de Navegação */
+@keyframes grid-move-forward {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 50px; /* Move exatamente o tamanho de uma célula para criar loop infinito */
+  }
+}
+
+/* Linhas Finas (Global) */
+.border-gold-thin {
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 12px;
+}
+
+/* Neon Suave (Global) */
+.neon-soft-glow {
+  box-shadow: 0 0 15px var(--neon-glow);
+}
+
+/* SURGICAL SECURITY FIX: CSS Print Shield */
+@media print {
+  body {
+    display: none !important;
+  }
+}

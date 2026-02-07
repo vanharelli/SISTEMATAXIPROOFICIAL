@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+/* Global styles - High Fidelity Visual Transplant */
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  /* 1. BACKGROUND: Linear escuro + Grid Animation */
+  background: 
+    radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.1) 1px, transparent 1px),
+    linear-gradient(135deg, #000000 0%, #0a0a0a 100%);
+  background-size: 40px 40px, 100% 100%;
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* --- 2. MÓDULO (CARD) --- */
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+.login-pillar {
+    /* Glow Dourado e Borda Dourada */
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.8),
+        0 0 30px rgba(212, 175, 55, 0.15),
+        0 0 60px rgba(212, 175, 55, 0.1);
+    
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 40px;
+    
+    /* Animação Float */
+    animation: float 6s ease-in-out infinite;
+    
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    margin: auto;
+}
+
+/* --- 3. TÍTULO (NEON FLICKER) --- */
+
+@keyframes neonFlicker {
+  0%, 100% {
+    text-shadow: 
+      0 0 4px #fff,
+      0 0 10px #fff,
+      0 0 20px #D4AF37,
+      0 0 40px #D4AF37,
+      0 0 70px #D4AF37;
+    opacity: 1;
+  }
+  50% {
+    text-shadow: 
+      0 0 2px #fff,
+      0 0 5px #fff,
+      0 0 10px #D4AF37,
+      0 0 20px #D4AF37;
+    opacity: 0.9;
+  }
+  52% { opacity: 0.8; }
+  54% { opacity: 0.95; }
+}
+
+.neonFlicker {
+    color: #ffffff;
+    font-weight: 900;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    animation: neonFlicker 4s infinite alternate;
+}
+
+/* --- FX VISUAL AVANÇADO (SCANNER + BIG LOCK) --- */
+
+/* --- LOADING CIRCLE ORIGINAL --- */ 
+.loading { display: none; justify-content: center; align-items: center; margin-top: 30px; } 
+.loading.active { display: flex; } 
+.circle-loader { width: 60px; height: 60px; position: relative; } 
+.circle-loader::before, .circle-loader::after { content: ''; position: absolute; border-radius: 50%; } 
+.circle-loader::before { width: 100%; height: 100%; border: 4px solid transparent; border-top-color: gold; border-right-color: gold; animation: spinPulse 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite; } 
+.circle-loader::after { width: 70%; height: 70%; top: 15%; left: 15%; border: 3px solid transparent; border-bottom-color: #30c522; border-left-color: #30c522; animation: spinPulse 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite reverse; } 
+@keyframes spinPulse { 0% { transform: rotate(0deg) scale(1); opacity: 1; } 50% { transform: rotate(180deg) scale(1.2); opacity: 0.7; } 100% { transform: rotate(360deg) scale(1); opacity: 1; } }  
+
+/* --- TELA DE SCANNER BLUR --- */ 
+.scanner-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(20px); z-index: 1000; justify-content: center; align-items: center; } 
+.scanner-screen.active { display: flex; } 
+.scanner-box { width: 400px; height: 400px; border: 3px solid gold; border-radius: 20px; position: relative; box-shadow: 0 0 40px rgba(255, 215, 0, 0.6), inset 0 0 40px rgba(255, 215, 0, 0.2); overflow: hidden; } 
+.scan-line { position: absolute; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, gold, transparent); box-shadow: 0 0 20px gold; animation: scanning 2s ease-in-out infinite; } 
+@keyframes scanning { 0% { top: 0; } 100% { top: 100%; } } 
+
+/* --- TELA DE ACESSO LIBERADO (CADEADO) --- */ 
+.access-granted { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(20px); z-index: 1001; justify-content: center; align-items: center; flex-direction: column; } 
+.access-granted.active { display: flex; animation: fadeIn 0.5s ease-in; } 
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } } 
+
+/* CADEADO GRANDE */ 
+.lock-container { position: relative; animation: floatLock 3s ease-in-out infinite; } 
+@keyframes floatLock { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } } 
+.lock-body { width: 120px; height: 140px; background: linear-gradient(135deg, gold, #ffed4e); border-radius: 20px; position: relative; box-shadow: 0 0 40px rgba(255, 215, 0, 0.8), 0 0 80px rgba(255, 215, 0, 0.5), inset 0 0 30px rgba(255, 215, 0, 0.3); } 
+.lock-shackle { width: 80px; height: 60px; border: 15px solid #c0c0c0; border-bottom: none; border-radius: 40px 40px 0 0; position: absolute; top: -50px; left: 50%; transform: translateX(-50%); box-shadow: 0 0 20px rgba(48, 197, 34, 0.8), inset 0 0 15px rgba(48, 197, 34, 0.4); animation: neonPulse 2s ease-in-out infinite; } 
+@keyframes neonPulse { 0%, 100% { box-shadow: 0 0 20px rgba(48, 197, 34, 0.8), inset 0 0 15px rgba(48, 197, 34, 0.4); } 50% { box-shadow: 0 0 40px rgba(48, 197, 34, 1), inset 0 0 25px rgba(48, 197, 34, 0.6); } } 
+.lock-keyhole { width: 20px; height: 20px; background: #0f0f23; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 15px rgba(0, 0, 0, 0.8); } 
+.lock-keyhole::after { content: ''; width: 8px; height: 30px; background: #0f0f23; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); } 
+.access-text { margin-top: 60px; font-size: 2.5rem; font-weight: bold; color: gold; text-shadow: 0 0 20px rgba(255, 215, 0, 1), 0 0 40px rgba(255, 215, 0, 0.8), 0 0 60px rgba(48, 197, 34, 0.5); animation: textGlow 2s ease-in-out infinite; } 
+@keyframes textGlow { 0%, 100% { text-shadow: 0 0 20px rgba(255, 215, 0, 1), 0 0 40px rgba(255, 215, 0, 0.8); } 50% { text-shadow: 0 0 30px rgba(255, 215, 0, 1), 0 0 60px rgba(255, 215, 0, 1), 0 0 80px rgba(48, 197, 34, 0.6); } } 

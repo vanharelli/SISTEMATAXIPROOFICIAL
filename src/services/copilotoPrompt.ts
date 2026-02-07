@@ -1,0 +1,1 @@
+export const COPILOTO_SYSTEM_PROMPT = ``;

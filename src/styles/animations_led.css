@@ -1,0 +1,43 @@
+
+/* Animation for LED Pulse */
+@keyframes pulse-led-green {
+  0% {
+    box-shadow: 0 0 0 0 rgba(48, 197, 34, 0.7);
+    transform: scale(1);
+  }
+  70% {
+    box-shadow: 0 0 10px 10px rgba(48, 197, 34, 0);
+    transform: scale(1);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(48, 197, 34, 0);
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-led-red {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 50, 50, 0.7);
+    transform: scale(1);
+  }
+  70% {
+    box-shadow: 0 0 10px 10px rgba(255, 50, 50, 0);
+    transform: scale(1);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 50, 50, 0);
+    transform: scale(1);
+  }
+}
+
+.led-green {
+  background-color: var(--green-led, #30c522) !important;
+  box-shadow: 0 0 10px #30c522 !important;
+  animation: pulse-led-green 2s infinite !important;
+}
+
+.led-red {
+  background-color: #ff3333 !important;
+  box-shadow: 0 0 10px #ff3333 !important;
+  animation: pulse-led-red 2s infinite !important;
+}

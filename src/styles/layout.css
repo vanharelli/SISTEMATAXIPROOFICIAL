@@ -1,0 +1,149 @@
+/* Layout styles */
+html, body {
+  height: auto !important;
+  min-height: -webkit-fill-available !important; /* Corrige bug no iOS/Chrome */
+  min-height: 100dvh !important; /* Corrige bug no Android Chrome */
+  overflow-x: hidden !important;
+  position: relative !important;
+  padding: 0;
+  margin: 0;
+}
+
+#root {
+  background-color: transparent !important;
+  background: transparent !important;
+  width: 100%;
+  height: 100%;
+}
+
+.app-container {
+  width: 100%;
+  min-height: 100dvh;
+  margin: 0 auto;
+  position: relative;
+  /* Garante margens laterais no mobile */
+  padding-left: 0;
+  padding-right: 0;
+}
+
+@media (min-width: 768px) {
+  .app-container {
+    max-width: 500px;
+    padding-left: 0; /* Remove padding extra no desktop pois já tem largura fixa */
+    padding-right: 0;
+    border-left: 1px solid rgba(212, 175, 55, 0.2);
+    border-right: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.2); /* Slight darkening for better contrast on desktop */
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Login Layout */
+.login-container {
+  height: 100dvh; /* Força altura total */
+  width: 100%;
+  display: flex;
+  flex-direction: column; /* Garante fluxo vertical */
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  overflow: hidden;
+  z-index: 9999; /* Garante visibilidade sobre backgrounds */
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .login-container {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+.login-card {
+  width: min(90%, 350px);
+  /* Estilo Glass Frost - Deep Night */
+  background: rgba(0, 5, 10, 0.4);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  /* Linha fina dourada apenas no topo e base (sutil) */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  /* Bordas Laterais Elite (Dourado Neon) */
+  border-left: 2px solid #FFD700;
+  border-right: 2px solid #FFD700;
+  border-radius: 24px;
+  padding: 40px 20px;
+  text-align: center;
+  /* Glow intenso dourado */
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.1), inset 4px 0 15px rgba(255, 215, 0, 0.05), inset -4px 0 15px rgba(255, 215, 0, 0.05);
+  animation: none !important; /* Ensure no pulse effect */
+}
+
+/* Main Stage */
+.main-stage {
+  width: 100%;
+  min-height: 100dvh; /* Garante preenchimento em mobile/desktop */
+  height: auto;
+  padding-top: 85px !important; /* Ajuste para header 85px */
+  padding-bottom: 0 !important; /* Reset para controle na section interna */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Reduzido gap para controle fino via margin */
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y: auto;
+  background-color: transparent !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.tools-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto; /* Empurra para baixo */
+  margin-bottom: 0;
+  /* Cálculo de Precisão Magnética (Modo Deus):
+     Badge Bottom: 30px
+     Badge Height: ~34px
+     Badge Top (from viewport bottom): ~64px
+     Desired Gap: 20px (Respiro Elegante)
+     Target Content Bottom: 84px
+     Padding de Segurança: 100px (Aumentado para garantir respiro com escala dos pilares)
+  */
+  padding-bottom: 100px; 
+  background-color: transparent !important;
+  background: transparent !important;
+  z-index: 50;
+  position: relative;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* NUCLEAR TRANSPARENCY PROTOCOL - MODO DEUS */
+.main-stage, 
+.tools-section, 
+.carousel-wrapper, 
+.modules-container,
+.pillars-container,
+.main-stage > *:not(.module-card):not(.pillar-card):not(.tool-card),
+.tools-section > *:not(.module-card):not(.pillar-card):not(.tool-card),
+.carousel-wrapper > *:not(.module-card):not(.pillar-card):not(.tool-card),
+.modules-container > *:not(.module-card):not(.pillar-card):not(.tool-card),
+.pillars-container > *:not(.module-card):not(.pillar-card):not(.tool-card) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Exceções Obrigatórias - Preservar Cards e Elementos UI:
+   .module-card, .pillar-card, .tool-card, .status-badge-pill, .glass-header, .locked-layer
+   (Background mantido conforme definido no componente, exclusão via :not acima) */

@@ -1,0 +1,614 @@
+/* Modules styles */
+
+/* Container geral de módulos para garantir transparência */
+.modules-container {
+  background-color: transparent !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Glass Header & Footer - Deep Night Edition */
+.glass-header,
+.glass-footer {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 64px; /* Reduced height for mobile optimization */
+  background: rgba(0, 5, 10, 0.85); /* Darker Deep Night Glass */
+  backdrop-filter: blur(20px);
+/* AJUSTE EXTRA: O Header usa "top: 0". Se diminuir a altura, o conteúdo pode subir demais. */ /* Increased blur for density */
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  border-bottom: 1px solid #00F3FF; /* Alinhado com o azul neon do chat */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); /* Shadow depth */
+}
+
+@media (min-width: 768px) {
+  .glass-header,
+  .glass-footer {
+    width: 500px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 1px solid rgba(212, 175, 55, 0.2);
+    border-right: 1px solid rgba(212, 175, 55, 0.2);
+  }
+}
+
+.glass-header {
+  top: 20px; /* Added spacing from top to avoid browser address bar conflict */
+}
+
+.glass-footer {
+  bottom: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: none;
+}
+
+/* Status Badge Flutuante - Modo Deus */
+.status-badge-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 24px;
+  background: rgba(0, 5, 10, 0.4); /* Darker Glass Frost */
+  backdrop-filter: blur(15px); /* Increased blur */
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid var(--gold-marketelli);
+  border-radius: 9999px;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  
+  /* Posicionamento Fixo e Blindado */
+  position: fixed !important;
+  bottom: 30px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 9999 !important;
+  pointer-events: none; /* Permite cliques através do badge */
+}
+
+/* Bolinha LED */
+.led-indicator {
+  width: 8px;
+  height: 8px;
+  background-color: var(--green-led);
+  border-radius: 50%;
+  box-shadow: 0 0 10px #30c522; /* Brilho Neon Específico */
+}
+
+.led-green {
+  background-color: var(--green-led, #30c522) !important;
+  box-shadow: 0 0 10px #30c522 !important;
+  animation: pulse-led-green 1.5s infinite !important;
+}
+
+.led-red {
+  background-color: #ff3333 !important;
+  box-shadow: 0 0 10px #ff3333 !important;
+  animation: pulse-led-red 1.5s infinite !important;
+}
+
+@keyframes pulse-led-green {
+  0% { box-shadow: 0 0 0 0 rgba(48, 197, 34, 0.9); transform: scale(0.95); opacity: 1; }
+  50% { box-shadow: 0 0 20px 10px rgba(48, 197, 34, 0.2); transform: scale(1.2); opacity: 1; }
+  100% { box-shadow: 0 0 0 0 rgba(48, 197, 34, 0); transform: scale(0.95); opacity: 1; }
+}
+
+@keyframes pulse-led-red {
+  0% { box-shadow: 0 0 0 0 rgba(255, 50, 50, 0.9); transform: scale(0.95); opacity: 1; }
+  50% { box-shadow: 0 0 20px 10px rgba(255, 50, 50, 0.2); transform: scale(1.2); opacity: 1; }
+  100% { box-shadow: 0 0 0 0 rgba(255, 50, 50, 0); transform: scale(0.95); opacity: 1; }
+}
+
+/* Layers de Segurança (Bloqueio) */
+.locked-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 12px;
+  z-index: 10;
+  gap: 10px;
+}
+
+.neon-lock-icon {
+  color: var(--gold-marketelli);
+  font-size: 40px;
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.8));
+  animation: float-icon 3s infinite ease-in-out;
+}
+
+/* Access Granted Overlay - Module 1 (Modo Deus) */
+.access-granted-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Z-index 15: Above content (auto), below LED (20) */
+  z-index: 15;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none; /* Permite interação se necessário, mas visualmente domina */
+  border-radius: 24px; /* Matches module card border radius */
+}
+
+/* Removed parent animation to keep icon bright */
+/* @keyframes pulse-green-overlay removed/unused */
+
+.unlocked-icon-large {
+  font-size: 5rem; /* Large icon */
+  line-height: 1;
+  color: #30c522; /* Fluorescent Green */
+  /* Intense Glow Effect */
+  text-shadow: 0 0 20px #30c522, 0 0 40px #30c522, 0 0 60px #30c522;
+  animation: float-icon 3s infinite ease-in-out;
+}
+
+@keyframes float-icon {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Refined Access Granted Structure */
+.access-granted-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #30c522cc 0%, rgba(48, 197, 34, 0.2) 60%, transparent 100%);
+  border-radius: 24px;
+  animation: pulse-bg-opacity 2s infinite ease-in-out;
+}
+
+@keyframes pulse-bg-opacity {
+  0% { opacity: 0.1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 0.1; }
+}
+
+.unlocked-icon-container {
+  position: relative;
+  z-index: 16;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Scanner Overlay Animation */
+.scanner-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gold-marketelli);
+  box-shadow: 0 0 10px var(--gold-marketelli);
+  opacity: 0.5;
+  animation: scan 3s linear infinite;
+}
+
+@keyframes scan {
+  0% { top: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Tool Cards (Glass Frost) */
+.tool-card {
+  width: 90%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  /* margin-bottom movido para controle externo ou inline no map */
+}
+
+.tool-card:active {
+  transform: scale(0.98);
+}
+
+/* Pro Tool Card - Neon Sidebar Edition */
+.pro-tool-card {
+  background: rgba(0, 5, 10, 0.6) !important;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  
+  /* NEON SIDEBAR CONFIG */
+  border: none !important;
+  border-right-width: 4px !important;
+  border-right-style: solid !important;
+  
+  border-radius: 16px !important;
+  box-shadow: none !important;
+  
+  /* Dimensions & Layout */
+  width: 85% !important;
+  max-width: 340px !important;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+  min-height: 60px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 4% !important;
+}
+
+/* Neon Pulse Animations (Soft Breathing LED) */
+@keyframes neon-pulse-yellow {
+  0%, 100% { 
+    border-right-color: #D4AF37; 
+    box-shadow: 10px 0 20px -5px rgba(212, 175, 55, 0.3); 
+  }
+  50% { 
+    border-right-color: #FACC15; 
+    box-shadow: 12px 0 25px -2px rgba(212, 175, 55, 0.6); 
+  }
+}
+
+@keyframes neon-pulse-green {
+  0%, 100% { 
+    border-right-color: #30c522; 
+    box-shadow: 10px 0 20px -5px rgba(48, 197, 34, 0.3); 
+  }
+  50% { 
+    border-right-color: #30c522; 
+    box-shadow: 12px 0 25px -2px rgba(48, 197, 34, 0.6); 
+  }
+}
+
+@keyframes neon-pulse-blue {
+  0%, 100% { 
+    border-right-color: #3B82F6; 
+    box-shadow: 10px 0 20px -5px rgba(59, 130, 246, 0.3); 
+  }
+  50% { 
+    border-right-color: #60A5FA; 
+    box-shadow: 12px 0 25px -2px rgba(59, 130, 246, 0.6); 
+  }
+}
+
+/* Enforced Color Sequence via nth-child */
+/* Card 1: Yellow Neon */
+.tools-section > div:nth-child(2).pro-tool-card {
+  border-right: 4px solid #EAB308 !important;
+  box-shadow: 10px 0 20px -5px rgba(234, 179, 8, 0.3) !important;
+  animation: neon-pulse-yellow 3s infinite ease-in-out !important;
+}
+
+/* Card 2: Green Neon */
+.tools-section > div:nth-child(3).pro-tool-card {
+  border-right: 4px solid #30c522 !important;
+  box-shadow: 10px 0 20px -5px rgba(48, 197, 34, 0.3) !important;
+  animation: neon-pulse-green 3s infinite ease-in-out !important;
+}
+
+/* Card 3: Blue Neon */
+.tools-section > div:nth-child(4).pro-tool-card {
+  border-right: 4px solid #3B82F6 !important;
+  box-shadow: 10px 0 20px -5px rgba(59, 130, 246, 0.3) !important;
+  animation: neon-pulse-blue 3s infinite ease-in-out !important;
+}
+
+.pro-tool-card-wide {
+  width: 95% !important;
+  max-width: 400px !important;
+}
+
+.tool-card-neon-strip {
+  display: none; /* Removido em favor do border-left */
+}
+
+/* Pulse Animations */
+@keyframes border-pulse-blue {
+  0%, 100% { border-color: rgba(0, 212, 255, 0.5); box-shadow: inset 15px 0 20px -10px rgba(0, 212, 255, 0.2); }
+  50% { border-color: rgba(0, 212, 255, 1); box-shadow: inset 15px 0 25px -5px rgba(0, 212, 255, 0.4); }
+}
+
+@keyframes border-pulse-gold {
+  0%, 100% { border-color: rgba(255, 215, 0, 0.5); box-shadow: inset 15px 0 20px -10px rgba(255, 215, 0, 0.2); }
+  50% { border-color: rgba(255, 215, 0, 1); box-shadow: inset 15px 0 25px -5px rgba(255, 215, 0, 0.4); }
+}
+
+@keyframes border-pulse-green {
+  0%, 100% { border-color: rgba(48, 197, 34, 0.5); box-shadow: inset 15px 0 20px -10px rgba(48, 197, 34, 0.2); }
+  50% { border-color: rgba(48, 197, 34, 1); box-shadow: inset 15px 0 25px -5px rgba(48, 197, 34, 0.4); }
+}
+
+@keyframes border-pulse-full-gold {
+  0%, 100% { border-color: rgba(255, 215, 0, 0.3); box-shadow: 0 0 30px rgba(255, 215, 0, 0.1); }
+  50% { border-color: rgba(255, 215, 0, 0.8); box-shadow: 0 0 40px rgba(255, 215, 0, 0.3); }
+}
+
+@keyframes border-pulse-full-green {
+  0%, 100% { border-color: rgba(48, 197, 34, 0.3); box-shadow: 0 0 30px rgba(48, 197, 34, 0.1); }
+  50% { border-color: rgba(48, 197, 34, 0.8); box-shadow: 0 0 40px rgba(48, 197, 34, 0.3); }
+}
+
+/* Neon Side Borders - Left Only (Disabled for Pro Tools specific control) */
+/* neon-blue, neon-gold, neon-green classes removed as they were disabled/empty */
+
+.tool-card-content {
+  margin-left: 12px; /* Ajustado para o novo padding */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px; /* Reduzido para compacidade */
+  flex: 1; /* Ocupa espaço disponível empurrando a seta */
+}
+
+.tool-card-title {
+  color: #fff;
+  font-size: 0.85rem; /* Reduzido para Anti-Scroll */
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+}
+
+.tool-card-subtitle {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.65rem; /* Reduzido para Anti-Scroll */
+  line-height: 1.1;
+}
+
+/* Support Menu Styles */
+.support-dropdown {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 12px;
+  padding: 12px 20px;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.support-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+
+.support-item:hover {
+  opacity: 0.8;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Neon Border Module - Incomplete State (Dual Sidebar Neon) */
+.neon-border-module {
+  /* Remove Full Border */
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  
+  /* Dual Sidebar - Yellow Neon */
+  border-left: 4px solid #EAB308 !important; /* Yellow-500 */
+  border-right: 4px solid #EAB308 !important; /* Yellow-500 */
+  
+  /* Side Glow - Yellow (Dual Beams) */
+  box-shadow: 
+    15px 0 20px -5px rgba(234, 179, 8, 0.3), 
+    -15px 0 20px -5px rgba(234, 179, 8, 0.3) !important;
+  
+  /* Clean Background - Glass Frost */
+  background: rgba(0, 5, 10, 0.6) !important;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  
+  border-radius: 24px !important;
+  filter: none !important;
+  
+  /* Animation: Pulse effect for 'active energy' */
+  animation: pulse-sidebar-yellow 2s infinite ease-in-out !important;
+}
+
+/* Active Step Specifics (Intensified Pulse) */
+.neon-border-module.status-active-step {
+  animation: pulse-sidebar-yellow-intense 2s infinite ease-in-out !important;
+}
+
+/* Define Pulse Animation (General - Locked/Pending) */
+@keyframes pulse-sidebar-yellow {
+  0%, 100% { 
+    border-color: #EAB308; 
+    box-shadow: 15px 0 20px -5px rgba(234, 179, 8, 0.2), -15px 0 20px -5px rgba(234, 179, 8, 0.2);
+  }
+  50% { 
+    border-color: #FACC15; 
+    box-shadow: 20px 0 25px -5px rgba(234, 179, 8, 0.4), -20px 0 25px -5px rgba(234, 179, 8, 0.4);
+  }
+}
+
+/* Define Pulse Animation (Intense - Active Step) */
+@keyframes pulse-sidebar-yellow-intense {
+  0%, 100% { 
+    border-color: #EAB308; 
+    box-shadow: 15px 0 20px -5px rgba(234, 179, 8, 0.3), -15px 0 20px -5px rgba(234, 179, 8, 0.3);
+  }
+  50% { 
+    border-color: #FEF08A; /* Brighter */
+    box-shadow: 25px 0 40px -5px rgba(234, 179, 8, 0.6), -25px 0 40px -5px rgba(234, 179, 8, 0.6);
+  }
+}
+
+/* Completed Module State - Green Neon (Dual Sidebar Success) */
+.neon-border-module-completed {
+  /* Remove Full Border */
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  
+  /* Dual Sidebar - Green Neon */
+  border-left: 4px solid #30c522 !important; /* Fluorescent Green */
+  border-right: 4px solid #30c522 !important; /* Fluorescent Green */
+  
+  /* Side Glow - Green (Dual Beams) */
+  box-shadow: 
+    15px 0 20px -5px rgba(48, 197, 34, 0.3), 
+    -15px 0 20px -5px rgba(48, 197, 34, 0.3) !important;
+  
+  /* Animation Removed for Static Elegance */
+  animation: none !important;
+  
+  /* Clean Background - Glass Frost */
+  background: rgba(0, 5, 10, 0.6) !important;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 24px !important;
+}
+
+/* Neon Separator Line */
+.neon-separator {
+  height: 1px;
+  background-color: var(--gold-marketelli);
+  box-shadow: 0 0 12px var(--gold-marketelli), 0 0 5px rgba(212, 175, 55, 0.5);
+  width: 100px;
+  margin: 0 auto; /* Margem zerada para controle preciso via container pai */
+  border: none;
+}
+
+/* GOD MODE - ENFORCED TRANSPARENCY */
+.carousel-wrapper,
+.main-stage,
+.modules-container {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.main-stage > *:not(.module-card):not(.tool-card) {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* LED Status System */
+@keyframes led-blink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.9); }
+}
+
+.card-led-status {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  z-index: 20;
+  animation: led-blink 2s infinite ease-in-out;
+}
+
+.led-green-fluorescent {
+  background-color: #30c522;
+  box-shadow: 0 0 15px #30c522, 0 0 5px #30c522;
+}
+
+.led-red-neon {
+  background-color: #FF0000;
+  box-shadow: 0 0 15px #FF0000, 0 0 5px #FF0000;
+}
+
+/* === NOVOS ESTILOS FERRAMENTAS PRO (GLASS OBSIDIAN) === */
+
+/* RESET DE BORDAS PARA PADRÃO GLASS OBSIDIAN */
+.modulo-container {
+    background: rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.03) !important; /* Outline ultra fino */
+    margin-bottom: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 4px !important; /* Cantos levemente suavizados padrão elite */
+    display: flex;
+    flex-direction: column;
+    padding: 20px; /* p-5 equivalent */
+    position: relative;
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.modulo-container:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    transform: translateX(-5px); /* Efeito de retração ao interagir */
+}
+
+/* 1. CALCULADORA (VERDE DIREITA) */
+.border-right-calculadora {
+    border-right: 4px solid #30c522 !important;
+    box-shadow: 5px 0 15px rgba(48, 197, 34, 0.05);
+}
+
+/* 2. COPILOTO (AZUL DIREITA) */
+.border-right-copiloto {
+    border-right: 4px solid #0096ff !important;
+    box-shadow: 5px 0 15px rgba(0, 150, 255, 0.05);
+}
+
+/* 3. COMUNIDADE (GOLD DIREITA) */
+.border-right-comunidade {
+    border-right: 4px solid #D4AF37 !important;
+    box-shadow: 5px 0 15px rgba(212, 175, 55, 0.05);
+}
+
+/* TEXTOS TÁTICOS */
+.label-modulo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.sublabel-modulo {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 10px;
+    margin-top: 4px; /* mt-1 equivalent */
+    text-transform: uppercase;
+    letter-spacing: 0.1em; /* tracking-widest equivalent */
+    font-family: sans-serif; /* fallback or standard font */
+}

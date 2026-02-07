@@ -1,0 +1,190 @@
+/* Effects styles */
+
+/* Scrollbar Hiding */
+.carousel-wrapper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+.carousel-wrapper {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Carrossel Titan - 3D Carousel com Center Focus (somente pilares superiores) */
+.carousel-wrapper {
+  display: flex;
+  align-items: flex-start; /* Alinhamento ao topo */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  /* 
+     Simetria Global: 
+     O padding-top define a distância para o Header.
+     Header Height: 60px
+     Padding-top do Main Stage: 60px
+     Desired Gap: ~9px (igual à base)
+     Ajuste: 10px de padding compensa a sombra e o glow.
+     Padding lateral removido para controle via margin (Center Focus).
+  */
+  padding: 10px 0 10px 0; /* Reduced bottom padding */
+  gap: 10px;
+  perspective: 1200px;
+  width: 100%;
+  /* 
+     Ajuste de Posição Vertical: 6vh
+     Desce o pilar em destaque para evitar a sensação de 'esmagamento' contra o Header.
+     A zona de flutuação agora é dinâmica baseada na viewport.
+  */
+  margin: 2vh auto 0 auto; /* Reduced margin-top */
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  z-index: 100;
+  position: relative;
+}
+
+/* Centralização Matemática do Primeiro e Último Card (Compensação Escala 1.04) */
+/* REMOVIDO: Margens calculadas via VW causam problemas em containers limitados (Desktop).
+   A centralização agora é feita via padding no container (DashboardScreen.tsx).
+*/
+
+/* Card Pilar de Elite */
+.pillar-card {
+  min-width: 250px;
+  height: 250px; /* Reduced height from 400px */
+  /* Glass Frost Base - 50% Opacity */
+  background: rgba(0, 5, 10, 0.209) !important;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(0.85) translateY(10px); /* Ajuste para não cortar topo */
+  filter: blur(5px);
+  opacity: 0.5;
+  scroll-snap-align: center;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  /* Garantir que não haja corte visual */
+  overflow: visible !important;
+}
+
+.pillar-card.active {
+  transform: scale(1.05) translateY(0); /* Levemente menor que 1.1 para evitar corte */
+  filter: none;
+  opacity: 1;
+  z-index: 100;
+  /* Border and Glow delegated to pillars.css status classes */
+}
+
+.pillar-title {
+  color: var(--gold-marketelli);
+  font-size: 1.2rem; /* Reduced from 1.5rem */
+  text-align: center;
+  margin-bottom: 12px; /* Reduced from 20px */
+  font-weight: 300;
+  letter-spacing: 2px;
+  padding: 0 10px;
+}
+
+.pillar-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.5);
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: not-allowed;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+/* --- Activation Protocol Button Effects --- */
+
+/* REMOVIDO: Animação float-soft que interferia no posicionamento manual */
+/* 
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+*/
+
+@keyframes neon-pulse-gold {
+  0% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+  50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.7), 0 0 20px rgba(212, 175, 55, 0.3); }
+  100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+}
+
+.activation-protocol-wrapper {
+  display: block; /* Alterado de inline-block para respeitar margens verticais corretamente */
+  /* animation: float-soft 4s ease-in-out infinite; -- REMOVIDO */
+}
+
+.activation-protocol-btn {
+  background: #D4AF37;
+  color: #000;
+  font-weight: 900;
+  padding: 18px 40px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: neon-pulse-gold 3s infinite alternate;
+}
+
+.activation-protocol-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 50px rgba(212, 175, 55, 1);
+  /* Pausing animation on hover might cause jumps, so we let it run or override. 
+     Here we override box-shadow so the pulse is hidden by the strong hover glow. 
+     But since animation has higher specificity than hover unless !important or defined after keyframes? 
+     Actually keyframes usually win over static properties. 
+     To force hover glow, we can use !important or just let the pulse continue underneath. 
+     Let's use !important for hover state if needed, or disable animation. */
+  animation: none;
+}
+
+/* --- Response Suggestion Buttons Neon Pulse --- */
+@keyframes neon-pulse-green {
+  0% { box-shadow: 0 0 5px rgba(48, 197, 34, 0.2); }
+  50% { box-shadow: 0 0 15px rgba(48, 197, 34, 0.6), 0 0 5px rgba(48, 197, 34, 0.4); }
+  100% { box-shadow: 0 0 5px rgba(48, 197, 34, 0.2); }
+}
+
+@keyframes neon-pulse-purple {
+  0% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.2); }
+  50% { box-shadow: 0 0 15px rgba(139, 92, 246, 0.6), 0 0 5px rgba(139, 92, 246, 0.4); }
+  100% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.2); }
+}
+
+@keyframes neon-pulse-gold-soft {
+  0% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.2); }
+  50% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.6), 0 0 5px rgba(212, 175, 55, 0.4); }
+  100% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.2); }
+}
+
+.response-btn-pulse-green {
+  animation: neon-pulse-green 2s infinite ease-in-out;
+  transition: transform 0.2s ease;
+}
+.response-btn-pulse-green:hover {
+  transform: scale(1.03);
+}
+
+.response-btn-pulse-purple {
+  animation: neon-pulse-purple 2s infinite ease-in-out;
+  transition: transform 0.2s ease;
+}
+.response-btn-pulse-purple:hover {
+  transform: scale(1.03);
+}
+
+.response-btn-pulse-gold {
+  animation: neon-pulse-gold-soft 2s infinite ease-in-out;
+  transition: transform 0.2s ease;
+}
+.response-btn-pulse-gold:hover {
+  transform: scale(1.03);
+}
