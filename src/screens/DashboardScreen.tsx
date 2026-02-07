@@ -158,16 +158,16 @@ export const DashboardScreen = ({ onNavigate, unlockedLevel = 1, showUnlockEffec
         title: 'INSTRUTORA WEBDESIGNER', 
         subtitle: 'SITE PROFISSIONAL', 
         buttonText: 'ACESSAR PILAR 2', 
-        locked: false, // Force Unlock for Demo Strategy
+        locked: !isPilar2Unlocked,
         route: 'pillar2' as const 
     },
-    { id: 3, title: 'CHEFE OPERACIONAL', subtitle: 'PILAR 3 GOOGLE ADS', buttonText: 'ACESSAR PILAR 3', locked: true, route: 'pillar3' as const }, // Force Lock
+    { id: 3, title: 'CHEFE OPERACIONAL', subtitle: 'PILAR 3 GOOGLE ADS', buttonText: 'ACESSAR PILAR 3', locked: !isPilar3Unlocked, route: 'pillar3' as const },
   ];
 
   const tools = [
-    { id: 1, title: 'Calculadora de Lucro', subtitle: 'Simulação Financeira v5.0', route: 'calculadora' as const, borderClass: 'border-right-calculadora', textColor: '#30c522', locked: true }, // Force Lock
+    { id: 1, title: 'Calculadora de Lucro', subtitle: 'Simulação Financeira v5.0', route: 'calculadora' as const, borderClass: 'border-right-calculadora', textColor: '#30c522', locked: !isPilar3Unlocked },
     { id: 2, title: 'Co-Piloto 6.0', subtitle: 'Atendimento Automatizado', route: 'copiloto' as const, borderClass: 'border-right-copiloto', textColor: '#0096ff', locked: false },
-    { id: 3, title: 'Comunidade VIP', subtitle: 'Rede Operacional Elite', route: 'comunidade' as const, borderClass: 'border-right-comunidade', textColor: '#D4AF37', locked: true }, // Force Lock
+    { id: 3, title: 'Comunidade VIP', subtitle: 'Rede Operacional Elite', route: 'comunidade' as const, borderClass: 'border-right-comunidade', textColor: '#D4AF37', locked: !isVipUnlocked },
   ];
 
   const handlePillarClick = (index: number, locked: boolean, route: 'pillar1' | 'pillar2' | 'pillar3') => {

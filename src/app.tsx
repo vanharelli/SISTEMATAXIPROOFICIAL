@@ -40,7 +40,7 @@ export const App = () => {
     }
     
     // 4. Redirect to Kiwify (After interaction or if prompt missing)
-    window.location.href = 'https://pay.kiwify.com.br/F4YMAcB';
+    // window.location.href = 'https://pay.kiwify.com.br/F4YMAcB';
   };
 
   const handleDismissPWA = () => {
@@ -54,26 +54,18 @@ export const App = () => {
   const hasSession = !!localStorage.getItem('skynet_history');
   
   // DIRECT DEMO STRATEGY: Bypass Auth
-  const [isLogged, setIsLogged] = useState(true);
+  const [isLogged, setIsLogged] = useState(false);
   const [hasSeenAvisos, setHasSeenAvisos] = useState(hasEntry && hasSession);
   
   // Navigation & Progression State managed by GlobalProgressContext
   const { history, navigate, unlockNextLevel } = useGlobalProgress();
-
-  // DIRECT DEMO STRATEGY: 30-Minute Force Redirect
-  useEffect(() => {
-    const timer = setTimeout(() => {
-        window.location.href = 'https://pay.kiwify.com.br/F4YMAcB';
-    }, 30 * 60 * 1000);
-    return () => clearTimeout(timer);
-  }, []);
 
   // STANDALONE MODE ENFORCEMENT: Always show Login first
   useEffect(() => {
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone;
     if (isStandalone) {
       console.log('Running in Standalone Mode: Forcing Login Screen');
-      // setIsLogged(false); // Disabled for Demo
+      setIsLogged(false);
     }
   }, []);
 
